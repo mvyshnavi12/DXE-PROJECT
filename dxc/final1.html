@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+div#test{ border:#000 1px solid; padding:10px 40px 40px 40px; }
+</style>
+<p id="demo"></p>
+<script>
+	var finalT = new Date();
+	finalT.setHours(finalT.getHours() + 1);
+	var countDownDate = finalT.getTime();
+	var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now; 
+  //var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 10 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000); 
+  document.getElementById("demo").innerHTML =  minutes + "m " + seconds + "s ";  
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  	}
+	}, 1000);
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC,chD, correct = 0;
+var questions = [
+  [ "Sizeof operator returns size in?", "Bits", "Bytes", "Kilobytes","Megabytes","B" ],
+  [ "What does printf function returns?", "Size of integer", "Size of character", "Number of characters printed on the screen","Size of variable","C" ],
+  [ "What punctuation is used to signal the beginning and end of code blocks?", "{ }", "-> and <-", "BEGIN and END","( and )","A" ],
+  [ "Which of the following is not a correct variable type?", "float", "real", "int","double","B" ],
+  [ "Which of the following is the correct operator to compare two values?", ":=", "=", "equal","==","D" ],
+  [ "What is the range of A-Z in ASCII?", "1-26", "20-45", "65-90","97-122","C" ],
+  [ "Which is a valid keyword in Java?", "interface","string","Float","unsigned","A" ],
+  [ "What one of these takes bytecode as input and converts into machine level language?", "JDK", "JVM", "JRE","JSL","B" ],
+  [ "The upper bound on the time complexity of the non deterministic sorting algorithm is?", "O(n)", "O(nlogn)", "O(1)","O(log n)","A" ],
+  [ "Worst case efficiency of binary search is?", "log2 n+1", "n", "n^2","log n","A" ]
+	];
+function _(x){
+	return document.getElementById(x);
+}
+function renderQuestion()
+{
+	test = _("test");
+	if(pos >= questions.length)
+	{
+		clearInterval(x);
+    document.getElementById("demo").innerHTML = "Thank You";
+		test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" questions correct</h2>";
+		_("test_status").innerHTML = "Test Completed";
+		pos = 0;
+		correct = 0;
+		return false;
+	}
+	_("test_status").innerHTML = "Question "+(pos+1)+" of "+questions.length;
+	question = questions[pos][0];
+	chA = questions[pos][1];
+	chB = questions[pos][2];
+	chC = questions[pos][3];
+	chD = questions[pos][4];
+	
+	test.innerHTML = "<h3>"+question+"</h3>";
+	test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br>";
+	test.innerHTML += "<input type='radio' name='choices' value='D'> "+chD+"<br><br>";
+	test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
+}
+function checkAnswer(){
+	choices = document.getElementsByName("choices");
+	for(var i=0; i<choices.length; i++){
+		if(choices[i].checked){
+			choice = choices[i].value;
+		}
+	}
+	if(choice == questions[pos][5]){
+		correct++;
+		}
+		choice=""; 
+	
+	pos++;
+	renderQuestion();
+}
+window.addEventListener("load", renderQuestion, false);
+</script>
+</head>
+<body>
+<h2 id="test_status"></h2>
+<div id="test"></div>
+</body>
+</html>

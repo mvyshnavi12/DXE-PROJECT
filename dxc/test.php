@@ -1,0 +1,130 @@
+<html>
+<head><p align="center" style="font-family:curlz MT;font-size:48;"><strong>WELCOME TO QUIZWHIZZ</strong></p>
+</head>
+<body>
+<form action="logincheck.php" method="post" onsubmit="return validation();">
+<style>
+body {background-color:#7fb9d8;}
+</style>
+<img src="quiz23.jpg" width="350" height="200" style="position:absolute;top:80px;left:515px">
+<p align="center" style="position:absolute;top:280px;left:600px;font-size:28pt"><strong>Registration</strong></p>
+<table style="position:absolute;top:380px;left:550px;font-size:20pt">
+<tr><td>Username:</td>
+<td><input type="text" id="name" name="username">
+<span id="err"></span>
+</td>
+</tr>
+<tr><td>Password:</td>
+<td><input type="password" id="password" name="password" >
+<span id="errpassword"></span>
+</td>
+</tr>
+<tr><td>E-mail:</td>
+<td><input type="text" id="ema" name="email">
+<span id="erre"></span></td>
+
+</tr>
+<tr><td>Mobile:</td>
+<td><input type="text" id="ph" name="mobile">
+<span id="errph"></span></td>
+</tr>
+</table>
+<table style="position:absolute;top:525px;left:635px;font-size:30pt;">
+<tr><td><a href="logincheck.html"><button style="background:green;color:white;width:100px;border-radius:5px;boder-color:grey;" onclick="return validation">REGISTER</button></a></td></tr>
+</table>
+<script type="text/javascript">
+function validation()
+{
+var name=document.getElementById('name').value;
+var password=document.getElementById('password').value;
+var ph=document.getElementById("ph").value;
+var em=document.getElementById("ema").value;
+var alp=em.indexOf("@");
+var dpos=em.lastIndexOf(".");
+var cap=/[A-Z]/;
+var small=/[a-z]/;
+var num=/[0-9]/;
+var sys=/[!@#$%^*]/;
+if(name=="" || password=="" || em=="" || ph=="")
+{
+alert("ALL FIELDS REQUIRED");
+return false;
+}
+else if(password.length<8)
+{
+alert("Enter correct password");
+return false;
+}
+else if(!cap.test(password))
+{
+alert("Enter correct password");
+return false;
+}
+else if(!small.test(password))
+{
+alert("Enter correct password");
+return false;
+}
+else if(!num.test(password))
+{
+alert("Enter correct password");
+return false;
+}
+else if(!sys.test(password))
+{
+alert("Enter correct password");
+return false;
+}
+else if(ph=="")
+{
+alert("Enter mobile number");
+return false;
+}
+else if(cap.test(ph))
+{
+alert("Enter valid num");
+return false;
+}
+else if(small.test(ph))
+{
+alert("Enter valid num");
+return false;
+}
+else if(!num.test(ph))
+{
+alert("Enter valid num");
+return false;
+}
+else if(sys.test(ph))
+{
+alert("Enter valid num");
+return false;
+}
+else if(ph.length>10 || ph.length<10)
+{
+alert("Enter valid num");
+return false;
+}
+else if(em=="")
+{
+alert("enter your email id");
+return false;
+}
+else if(alp<1 || dpos<alp || dpos+2>em.length)
+{
+alert("enter valid email id");
+return false;
+}
+else
+{
+return true;
+}
+}
+</script>
+</form>
+</body>
+</html>
+
+
+
+
